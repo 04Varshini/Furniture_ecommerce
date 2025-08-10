@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopping Website</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      line-height: 1.4;
+      color: #222;
+    }
+
+    a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+    }
+
+    nav {
+      background-color: rgb(0, 138, 138);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
+      font-weight: bold;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    }
+
+    header {
+      background-image: url(images/furniture.jpg);
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .headerContent button {
+      padding: 12px 28px; 
+      line-height: 1; 
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center;  
+      font-weight: bold;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #008a8a;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .headerContent button:hover {
+      background-color: rgba(0, 138, 138, 0.9); 
+      color: #fff; 
+      font-weight: bold; 
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+      transform: scale(1.05);
+    }
+
+    .headerContent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      text-align: center;
+      color: white; 
+      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7); 
+      padding: 0 20px;
+    }
+    .headerContent h1 {
+      font-size: 40px;
+      margin: 0 0 12px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7); 
+      letter-spacing: 1px;
+    }
+    .headerContent p {
+      margin: 0 0 20px;
+      font-size: 22px;
+      font-weight: bold;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+    }
+
+    section {
+      background-color: #f4f4f4;
+      padding: 40px 20px;
+    }
+
+    section h1 {
+      text-align: center;
+      padding: 10px;
+      font-size: 40px;
+      color: rgb(0, 138, 138);
+      margin: 0 0 30px;
+    }
+
+    .products {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .product-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 250px;
+      box-shadow: 0px 2px 8px rgba(16, 14, 14, 0.08);
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    .product-card img:hover {
+      transform: scale(1.05);
+    }
+
+    .product-card h2 {
+      margin-top: 10px;
+      font-size: 22px;
+      color: rgb(0, 138, 138);
+    }
+
+    .site-footer {
+      background: #fff;
+      color: #222;
+      padding: 48px 6% 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto 24px;
+    }
+
+    .footer-grid h4 {
+      margin: 0 0 10px;
+      font-size: 18px;
+      color: #111;
+      font-weight: 700;
+    }
+
+    .footer-grid ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-grid li {
+      margin: 8px 0;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .footer-grid li a {
+      color: #666;
+      text-decoration: none;
+    }
+    .footer-grid li a:hover { color: #008a8a; }
+    .footer-address p { color: #555; font-size: 14px; margin: 6px 0; }
+    .footer-address .muted { color: #888; font-size: 13px; margin-top: 8px; }
+    .footer-bottom {
+      border-top: 1px solid #eee;
+      max-width: 1200px;
+      margin: 18px auto 0;
+      padding: 18px 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .connect { display:flex; align-items:center; gap:18px; }
+    .connect h5 { margin:0; font-size:15px; color:#222; font-weight:600; }
+    .social-icons { display:flex; gap:10px; align-items:center; }
+    .social-icons a {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:36px; height:36px;
+      background:#f1f1f1; border-radius:6px;
+      text-decoration:none; color:#333;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .social-icons a:hover { background: #e6f7f6; color:#008a8a; }
+
+    .app-badges { display:flex; gap:12px; align-items:center; }
+    .badge {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      background:#111;
+      color:#fff;
+      border-radius:8px;
+      font-size:13px;
+      text-decoration:none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+    }
+    .badge.small {
+      padding:8px 10px; font-size:12px;
+    }
+
+    .copyright {
+      max-width: 1200px;
+      margin: 8px auto 40px;
+      color: #777;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    .help-buttons {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 9999;
+    }
+    .help-btn {
+      width:56px; height:56px;
+      border-radius:50%;
+      background: linear-gradient(180deg,#ff7a3d,#ff5722);
+      color:white;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      text-decoration:none;
+      font-weight:700;
+    }
+    .help-btn.small {
+      width:44px;height:44px;border-radius:50%;
+      background:#ff6b2f; font-size:12px;
+    }
+
+    @media (max-width: 900px) {
+      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-bottom { flex-direction: column; align-items:flex-start; gap: 14px; padding-bottom: 12px; }
+    }
+    @media (max-width: 520px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .headerContent h1 { font-size: 30px; }
+      .headerContent p { font-size: 18px; }
+      nav { padding: 12px; }
+      .product-card { width: 90%; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <a href="">FURNITURE</a>
+    <div>
+      <span id="welcomeUser" style="color: white; margin-right: 20px;"></span>
+      <a href="mainpage.html">Home</a>
+      <a href="bestseller.html">Best Seller</a>
+      <a href="cart.html">🛒 CART</a>
+      <a href="">Contact</a>
+      <a href="login.html" id="authLink">Login</a>
+  </nav>
+
+  <script>
+    const authLink = document.getElementById("authLink");
+    const welcomeUser = document.getElementById("welcomeUser");
+
+    function updateAuthUI() {
+      const loggedIn = localStorage.getItem("loggedIn") === "true";
+      const username = localStorage.getItem("username");
+
+      if (loggedIn && username) {
+        welcomeUser.textContent = "Welcome, " + username;
+        authLink.textContent = "Logout";
+        authLink.href = "#";
+        authLink.onclick = function (e) {
+          e.preventDefault();
+          logout();
+        };
+      } else {
+        welcomeUser.textContent = "";
+        authLink.textContent = "Signup";
+        authLink.href = "login.html";
+        authLink.onclick = null;
+      }
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("username");
+      alert("You have been logged out!");
+      updateAuthUI();
+    }
+    window.onload = updateAuthUI;
+  </script>
+
+  <header>
+    <div class="headerContent">
+      <h1>HOME INTO HEAVEN</h1>
+      <p>We transform your home into heaven with our best furniture.</p>
+      <button><a href="shopnow.html" style="color:white; text-decoration:none;">SHOP NOW</a></button>
+    </div>
+  </header>
+
+  <section>
+    <h1>Our Best Sellers</h1>
+    <div class="products">
+      <div class="product-card">
+        <img src="images/sofa.jpg" alt="sofa">
+        <h2>SOFA</h2>
+        <p>3 seat sofa with chaise longue<br>Comfy cushions<br>The built-in storage is easy to access<br><b>Rs.59,990</b></p>
+      </div>
+      <div class="product-card">
+        <img src="images/dinningTable.png" alt="dining table">
+        <h2>DINING TABLE</h2>
+        <p>Table and 4 chairs<br>Black colour<br>The lacquered surface is easy to wipe clean<br><b>Rs.22,990</b></p>
+      </div>
+      <div class="product-card">
+        <img src="images/studyTable.jpg" alt="Study table">
+        <h2>STUDY TABLE</h2>
+        <p>Study table with chair<br>Finishing color: black<br>Material: wood, iron<br><b>Rs.8,590</b></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>The Company:</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Help</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Inside UL</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>More Information:</h4>
+        <ul>
+          <li><a href="#">Fees and Payment</a></li>
+          <li><a href="#">Shipping & Delivery</a></li>
+          <li><a href="#">Terms and Conditions</a></li>
+          <li><a href="#">Warranty, Return and Refund</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Explore More</h4>
+        <ul>
+          <li><a href="#">Refer & Earn</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Visit Us</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-address">
+        <h4>Address</h4>
+        <p>Reliance Retail Limited,<br>3rd Floor, Court House, Lokmanya Tilak Marg,<br>Dhobi Talao, Mumbai - 400 002, Maharashtra, India</p>
+        <p class="muted"><strong>CIN:</strong> U01100MH1999PLC120563</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="connect">
+        <div>
+          <h5 style="margin:0 0 6px 0;">Connect With Us:</h5>
+          <div style="font-size:13px;color:#666;margin-bottom:8px;">Call: +91 80698 07777 &nbsp; | &nbsp; Email: hello@example.com</div>
+          <div class="social-icons" aria-hidden="true">
+            <a href="#" title="Facebook" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.9v-7H8v-3h2.5V9.5c0-2.6 1.5-4 3.8-4 1.1 0 2.3.2 2.3.2v2.5h-1.3c-1.3 0-1.7.8-1.7 1.6V12H21l-1 3.9h-2v7A10 10 0 0 0 22 12z"/></svg>
+            </a>
+            <a href="#" title="Twitter" aria-label="Twitter">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.9c-.6.3-1.2.5-1.9.6.7-.4 1.2-1 1.4-1.7-.7.5-1.5.9-2.4 1.1C18.4 5 17.3 4.5 16 4.5c-2 0-3.6 1.6-3.6 3.6 0 .3 0 .6.1.9C9.7 8.8 7 7.4 5.2 5.1c-.4.7-.6 1.5-.6 2.4 0 1.6.8 3 2.1 3.9-.6 0-1.2-.2-1.7-.4v.1c0 2.2 1.5 4 3.5 4.4-.4.1-.8.2-1.2.2-.3 0-.6 0-.8-.1.6 1.8 2.3 3.1 4.3 3.1-1.6 1.3-3.6 2-5.8 2-.4 0-.7 0-1.1-.1C6.3 21 8.6 22 11.1 22c6.7 0 10.3-5.5 10.3-10.3v-.5c.7-.5 1.3-1.2 1.8-2z"/></svg>
+            </a>
+            <a href="#" title="Instagram" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 6.2A4.8 4.8 0 1 0 16.8 13 4.8 4.8 0 0 0 12 8.2zm6.2-2.7a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1z"/></svg>
+            </a>
+            <a href="#" title="YouTube" aria-label="YouTube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.1s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.7 3.2 12 3.2 12 3.2h-.1s-4.6 0-7.9.5c-.5 0-1.4 0-2.1 1C.2 5.4 0 7.1 0 7.1S0 9 0 10.9v2.2C0 15.7.2 17.6.2 17.6s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.7.2 7.2.5 7.2.5s4.6 0 7.9-.5c.5 0 1.4 0 2.1-1 .6-.7.8-2.4.8-2.4s.2-1.9.2-3.8V10.9c0-1.9-.2-3.8-.2-3.8zM10 15.5v-7l6 3.5-6 3.5z"/></svg>
+            </a>
+            <a href="#" title="LinkedIn" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 0h4.7v2.2h.1c.7-1.3 2.6-2.7 5.3-2.7 5.6 0 6.6 3.6 6.6 8.2V24H23v-8.9c0-2.1 0-4.8-3-4.8-3.1 0-3.6 2.4-3.6 4.6V24h-5V8z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="app-badges" aria-hidden="true">
+        <div>
+          <h5 style="margin:0 0 6px 0;">Download App:</h5>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <a class="badge" href="#" aria-label="App Store">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M16.5 1.5c-.5 0-1.3.6-1.8 1.2-.4.6-.9 1.3-.9 1.3s-.5-.7-.9-1.3C11.8 2.1 11 1.5 10.5 1.5 9 1.5 6.7 3 5.6 5.3 4.6 7.4 5.4 10.6 6.7 12c.9 1 2 2.1 3.8 2.1 1.7 0 2.2-1.2 4.5-1.2 2.4 0 3 1.2 4.6 1.2 1.9 0 3.2-1.7 3.6-3.5.3-1.4.9-5.1-2.2-7.9-1.6-1.5-3.3-2.1-4.5-2.1z"/></svg>
+              App Store
+            </a>
+            <a class="badge" href="#" aria-label="Google Play">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M3 2v20l18-10L3 2z"/></svg>
+              Google Play
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      &copy; <span id="year"></span> Furniture Store. All rights reserved.
+    </div>
+  </footer>
+
+  <div class="help-buttons">
+    <a class="help-btn" href="tel:+918069807777" title="Shop On Call" aria-label="Shop On Call">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M6.6 10.8c1.1 2.1 2.9 3.9 5 5 0.4 0.2 0.9 0.1 1.2-0.2l2.1-2.1c0.3-0.3 0.4-0.8 0.2-1.2-0.5-1.2-0.9-2.4-0.9-3.7 0-0.4-0.3-0.7-0.7-0.7h-2.1c-0.4 0-0.8 0.1-1.1 0.3-0.7 0.4-1.6 0.5-2.5 0.2-1.3-0.4-2.6-1.1-3.6-2.1C6.1 5.6 5.7 5.5 5.4 5.8L3.3 8c-0.3 0.3-0.4 0.8-0.2 1.2 0.7 1.9 1.7 3.7 3.5 5.6z"/></svg>
+    </a>
+    <a class="help-btn small" href="#" onclick="alert('Need help? Call +91 8069 807777 or email hello@example.com')" title="Need Help?" aria-label="Need Help?">
+      ?
+    </a>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
